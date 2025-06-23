@@ -1,4 +1,5 @@
 import userRepository from "../repositories/user.repositories.js";
+import { generateJWT } from "./auth.service.js";
 import bcrypt from "bcrypt";
 
 async function createUserService(newUser){
@@ -9,7 +10,11 @@ async function createUserService(newUser){
     const user = await userRepository.createUserRepository({...newUser, password: passHash,});   
     if(!user) throw new Error("Error creating User");
 
-    return user;
+    const userByEmail = await userRepository.findUserByEmailRepository(user.email)
+    
+    const token = generateJWT(userByEmail.id)
+
+    return token;
 }
 
 async function findAllUsesrService() {
