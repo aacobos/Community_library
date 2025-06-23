@@ -9,10 +9,8 @@ async function createUserService(newUser){
     const passHash = await bcrypt.hash(newUser.password, 10);
     const user = await userRepository.createUserRepository({...newUser, password: passHash,});   
     if(!user) throw new Error("Error creating User");
-
-    const userByEmail = await userRepository.findUserByEmailRepository(user.email)
     
-    const token = generateJWT(userByEmail.id)
+    const token = generateJWT(user.id)
 
     return token;
 }
