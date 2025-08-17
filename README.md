@@ -1,0 +1,3 @@
+Adicione instruções no README sobre como usar o arquivo .env.example:
+
+## Configuração do Ambiente 1. Copie o arquivo `.env.example` para `.env` 2. Preencha as variáveis de ambiente no arquivo `.env` com seus valores específicos
